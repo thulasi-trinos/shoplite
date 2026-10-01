@@ -1,0 +1,5 @@
+{
+  "name": "@shoplite/api-gateway",
+  "private": true,
+  "main": "src/routes.ts"
+}

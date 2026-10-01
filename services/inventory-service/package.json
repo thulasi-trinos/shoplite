@@ -1,0 +1,6 @@
+{
+  "name": "@shoplite/inventory-service",
+  "private": true,
+  "main": "src/server.ts",
+  "dependencies": { "lru-cache": "^10.2.0", "pg": "^8.11.0" }
+}

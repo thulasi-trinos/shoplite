@@ -1,0 +1,6 @@
+{
+  "name": "@shoplite/payment-service",
+  "private": true,
+  "main": "src/server.ts",
+  "dependencies": { "undici": "^6.19.0" }
+}

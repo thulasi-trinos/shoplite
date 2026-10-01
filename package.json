@@ -1,0 +1,5 @@
+{
+  "name": "shoplite",
+  "private": true,
+  "workspaces": ["services/*"]
+}
