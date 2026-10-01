@@ -4,7 +4,7 @@ export const dbConfig = {
   database: process.env.DB_NAME ?? 'checkout',
   user: process.env.DB_USER ?? 'checkout',
   password: process.env.DB_PASSWORD,
-  // Connections kept open per instance. Production runs 3 instances at ~1,200 requests/min.
-  poolMax: Number(process.env.DB_POOL_MAX ?? 20),
+  // Keep connections low: the staging database only allows 20 in total.
+  poolMax: Number(process.env.DB_POOL_MAX ?? 5),
   acquireTimeoutMs: 5000,
 };
