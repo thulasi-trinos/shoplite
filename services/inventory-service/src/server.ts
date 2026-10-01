@@ -1,5 +1,5 @@
 import { createServer } from 'node:http';
-import { getProduct, reserve } from './stock';
+import { getProduct, getStockBulk, reserve } from './stock';
 
 createServer(async (req, res) => {
   const reserveMatch = /^\/stock\/([\w-]+)\/reserve$/.exec(req.url ?? '');
@@ -8,6 +8,12 @@ createServer(async (req, res) => {
     for await (const chunk of req) body += chunk;
     const ok = await reserve(reserveMatch[1], JSON.parse(body).quantity);
     res.writeHead(ok ? 200 : 409).end();
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/stock/bulk') {
+    let body = '';
+    for await (const chunk of req) body += chunk;
+    res.writeHead(200).end(JSON.stringify(await getStockBulk(JSON.parse(body).skus)));
     return;
   }
   const getMatch = /^\/stock\/([\w-]+)$/.exec(req.url ?? '');

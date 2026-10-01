@@ -19,3 +19,11 @@ export async function reserve(sku: string, quantity: number): Promise<boolean> {
   productCache.delete(sku);
   return rowCount === 1;
 }
+
+export async function getStockBulk(skus: string[]): Promise<Record<string, number>> {
+  const { rows } = await pool.query<{ sku: string; stock: number }>(
+    'SELECT sku, stock FROM products WHERE sku = ANY($1)',
+    [skus],
+  );
+  return Object.fromEntries(rows.map((r) => [r.sku, r.stock]));
+}
